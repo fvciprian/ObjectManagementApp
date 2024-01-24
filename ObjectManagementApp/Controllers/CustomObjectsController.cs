@@ -16,12 +16,22 @@ namespace ObjectManagementApp.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Index page.
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(string search)
         {
             _logger.LogInformation($"Searching {search}");
             return View(await _objectService.SearchAsync(search));
         }
 
+        /// <summary>
+        /// Details page.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,11 +50,20 @@ namespace ObjectManagementApp.Controllers
             return View(customObject);
         }
 
+        /// <summary>
+        /// Create custom object.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Create post.
+        /// </summary>
+        /// <param name="customObject"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Type")] CustomObject customObject)
@@ -57,7 +76,11 @@ namespace ObjectManagementApp.Controllers
             return View(customObject);
         }
 
-        
+        /// <summary>
+        /// Edit custom object.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,6 +98,12 @@ namespace ObjectManagementApp.Controllers
             return View(customObject);
         }
 
+        /// <summary>
+        /// Edit post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="customObject"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Type")] CustomObject customObject)
@@ -109,6 +138,11 @@ namespace ObjectManagementApp.Controllers
             return View(customObject);
         }
 
+        /// <summary>
+        /// Delete.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,7 +161,11 @@ namespace ObjectManagementApp.Controllers
             return View(customObject);
         }
 
-        
+        /// <summary>
+        /// Delete post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
